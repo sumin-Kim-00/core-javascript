@@ -6,6 +6,8 @@
 
 학습이 완료된 항목은 체크박스로 표시됩니다.
 
-- [ ] Code Structure
-- [ ] Variables
-- [ ] Strict Mode
+- [X] Code Structure
+- [X] Variables
+- [X] Strict Mode
+- [X] Global This
+- [X] Data Types
