@@ -1,10 +1,28 @@
+/* 
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+*/
+
 h1 {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  transform: translateY(200px);
+  /* translate(-50%, -50%) */
 }
 
-/* body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
+span{
+  display: inline-block;
+  transition:all .5s;
+}
+
+span.is-active{
+  transform: translateY(-300px);
+  
+}
