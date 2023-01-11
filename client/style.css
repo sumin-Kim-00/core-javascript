@@ -26,3 +26,47 @@ span.is-active{
   transform: translateY(-300px);
   
 }
+
+
+.ground{
+  width: 600px;
+  height: 400px;
+  background: greenyellow;
+  border: 10px solid black;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.ball {
+  transition: all .3s;
+  /* 공을 클릭했을 때 아무일도 안일어나게 만들어줌 */
+  pointer-events: none;
+}
+
+.visual {
+  padding: 1.5rem;
+  background-color: lightpink;
+  
+}
+
+.news{
+  padding: 1rem;
+  background-color: lightblue;
+}
+
+.desc{
+  padding: 1rem;
+  background-color: lightyellow;
+}
+
+.pop{
+  width: 30vw;
+  height: 30vw;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
