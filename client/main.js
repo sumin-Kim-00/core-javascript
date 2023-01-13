@@ -2,7 +2,15 @@
 /* eslint no-undef:'warn' */
 /* eslint no-unused-vars: 'off' */
 
-// console.log(window);
+
+// import { getNode } from "./lib/dom/getNode.js"    // 대게 import 문은 최상위에 있음
+// import { attr } from "./lib/dom/attr.js"    
+// import { css, addClass, removeClass, toggleClass } from "./lib/dom/css.js" 
+// 이렇게 하면 너무 길어짐
+
+// 이 변수들 순서는 아무 상관없음!! 그냥 받기만 하면 됨!!
+import { css, addClass, removeClass, toggleClass } from "./lib/index.js" 
+
 
 const firstInput = getNode('#firstNumber');
 const secondInput = getNode('#secondNumber');
