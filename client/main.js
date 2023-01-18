@@ -1,5 +1,5 @@
 
-import {insertLast, xhrData} from "./lib/index.js"
+import {insertLast, xhrData, tiger, delayP} from "./lib/index.js"
 
 
 // xhrData.get(
@@ -14,3 +14,13 @@ import {insertLast, xhrData} from "./lib/index.js"
 //     insertLast('body', '데이터 로딩에 실패하였습니다.')
 //   }
 // )
+
+
+async function render(){
+  await delayP(2000);   // 2초 뒤에 수행
+  let response = await tiger.get('https://jsonplaceholder.typicode.com/users/1')
+  
+  console.log(response.data);
+}
+
+render()

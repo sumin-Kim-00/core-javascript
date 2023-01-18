@@ -116,6 +116,10 @@ function delayA(){
 }
  */
 
+
+
+
+/* 
 async function delayA(){
   return '완료'
 }
@@ -160,4 +164,4 @@ async function 라면끓이기(){
 
 
 
-라면끓이기()
+라면끓이기() */
