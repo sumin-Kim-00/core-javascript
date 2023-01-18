@@ -8,6 +8,8 @@
 // 보통 1, 2는 찍히지 않음
  */
 
+import { typeError } from "../error/typeError.js";
+
 
 //                객체의 구조분해할당 - 여기서 이렇게 하면 초기값을 줄 수 있음
 export function xhrData({
@@ -167,8 +169,6 @@ xhrData.post(
 
 
 
-
-
 // /* 이 두개는 세트임 !!!(open, send) */
 // // 비동기 통신 오픈
 // xhr.open('GET', 'https://jsonplaceholder.typicode.com/users')
@@ -188,4 +188,96 @@ xhrData.post(
 
 
 
-// console.log(xhr);
+
+// Promise API
+
+const defaultOptions = {
+  url: '',
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+  body: null
+}
+
+
+export function xhrPromise(options = {}){
+
+  const xhr = new XMLHttpRequest;
+
+  //     구조 분해 할당과                               합성을 동시에 하는 중
+  const {method, url, body, headers} =  Object.assign({}, defaultOptions, options)  //빈 객체 있어야함
+  // 빈 객체 없으면 defaultOptions 자체가 덮어써지므로 새 객체를 만들어야함
+  
+  if(!url) typeError('서버와 통신할 url 인자는 반드시 필요합니다.');
+
+
+  xhr.open(method, url);
+  xhr.send(body ? JSON.stringify(body) : null)
+
+  return new Promise((resolve, reject) => {
+    xhr.addEventListener('readystatechange', () =>{
+      const {status, readyState, response} = xhr;
+
+      if(status >= 200 && status < 400){    // 200 ~ 399 : 통신성공
+        if(readyState === 4) {    // 통신이 complete 됐을 때
+          console.log('통신 성공');
+          // onSuccess(JSON.parse(response));  // 이거 대신 프로미스에서는 resolve
+          resolve(JSON.parse(response));  // 객체화);
+        }
+      }else{
+        // onFail('통신 실패')
+        reject('에러입니다.')
+      }
+    })
+  })
+
+}
+
+
+
+
+// 프라미스 객체가 튀어나와야 하니까 return 해줘야함, 그래야 then catch ~ 쓸 수 있음
+xhrPromise.get = (url) => {
+  return xhrPromise({
+    url
+  })
+}
+
+// xhrPromise
+// .get('https://jsonplaceholder.typicode.com/users/1')
+// .then(res=>console.log(res))
+// .catch(err=>console.log(err))
+
+xhrPromise.post = (url,body) => {
+  return xhrPromise({
+    url,
+    body,
+    method:'POST'
+  })
+}
+
+
+xhrPromise.put = (url,body) => {
+  return xhrPromise({
+    url,
+    body,
+    method:'PUT'
+  })
+}
+
+
+xhrPromise.delete = (url) => {
+  return xhrPromise({
+    url,
+    method:'DELETE'
+  })
+}
+
+// xhrPromise()
+// .then(res=>console.log(res))
+// .catch(err=>console.log(err))
+
+
+
