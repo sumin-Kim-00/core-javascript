@@ -14,7 +14,28 @@ const defaultOptions = {
 }
 
 
+export const tiger = async (options = {}) =>{
 
+  const {url, ...restOptions} = {
+    ...defaultOptions,
+    ...options,
+    headers: {...defaultOptions.headers, ...options.headers}
+  }
+
+
+  let response = await fetch(url,restOptions)
+
+  if(response.ok){
+    response.data = await response.json()
+  }
+
+  // console.log(response);
+
+  return response;
+}
+
+
+/* 
 export const tiger = async (options = {}) => {
 
   //             rest parameter - 합성으로 나온 결과에 url만 빼고 나머지들 객체로 넘김
@@ -27,7 +48,7 @@ export const tiger = async (options = {}) => {
 
   // await는 async 함수 안에서만 사용 가능함
   let response = await fetch(
-    'https://jsonplaceholder.typicode.com/users/1',
+    'https://jsonplaceholder.typicode.com/users',
     {
       method: 'GET',
       headers: {
@@ -46,6 +67,8 @@ export const tiger = async (options = {}) => {
   return response;    // 보통 data를 return 하진 않음, 밑에 호출부에서 get 등등 작업을 할 수도 있기 때문에
   // 그냥 fetch만 된 애를 내보내서 밑에 받는 쪽에서 await해줌
 }
+ */
+
 
 // console.log(await tiger());
 
@@ -66,7 +89,7 @@ tiger.post = (url, body, options) => {
   })
 }
 
-tiger.post('www.naver.com', {name:tiger}, {mode:'cors', headers:{}})
+// tiger.post('www.naver.com', {name:tiger}, {mode:'cors', headers:{}})
 
 
 tiger.put = (url, body, options) => {
